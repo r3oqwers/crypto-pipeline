@@ -7,6 +7,7 @@
     { "src": "app.js", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/", "dest": "/index.html" },
     { "src": "/login", "dest": "/server.js" },
     { "src": "/protected", "dest": "/server.js" },
     { "src": "/(.*)", "dest": "/$1" }
