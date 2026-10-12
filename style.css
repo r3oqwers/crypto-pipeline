@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+body {
+    background-color: #121212; /* М'який темний фон, не ріже очі */
+    color: #e0e0e0; /* Приглушений білий текст */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Технічна сітка, ледь помітна */
+.cyber-grid {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: #1e1e1e; /* Колір графіту */
+    border: 1px solid #333333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* М'яка темна тінь */
+    padding: 30px;
+    border-radius: 4px; /* Легке заокруглення для сучасності */
+}
+
+.sys-info {
+    font-size: 10px;
+    color: #777777;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    border-left: 5px solid #888888; /* Сріблястий акцент */
+    padding-left: 10px;
+    color: #ffffff;
+}
+
+.nav-tabs { display: flex; gap: 5px; }
+
+.tab-btn {
+    background: #252525;
+    border: 1px solid #333333;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+    color: #888888;
+    transition: all 0.2s;
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-btn.active {
+    background: #e0e0e0; /* Світла металева кнопка */
+    color: #121212;
+    border-color: #e0e0e0;
+}
+
+.tab-btn:hover:not(.active) {
+    background: #2f2f2f;
+    color: #cccccc;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel {
+    border: 1px solid #333333;
+    padding: 20px;
+    margin-top: 20px;
+    background: #1a1a1a;
+    position: relative;
+    border-radius: 3px;
+}
+
+/* Декоративні куточки срібного кольору */
+.panel::before {
+    content: ''; position: absolute; top: -1px; left: -1px;
+    width: 12px; height: 12px; border-top: 2px solid #888888; border-left: 2px solid #888888;
+}
+
+h2 {
+    font-size: 14px;
+    margin-top: 0;
+    color: #cccccc;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 10px;
+}
+
+.desc { font-size: 11px; color: #777777; margin-bottom: 15px; }
+
+textarea, input {
+    background: #121212;
+    border: 1px solid #444444;
+    padding: 10px;
+    font-size: 13px;
+    outline: none;
+    color: #e0e0e0;
+    transition: border 0.2s;
+    border-radius: 2px;
+}
+
+textarea { width: 100%; height: 80px; resize: vertical; margin-bottom: 15px; }
+textarea:focus, input:focus { 
+    border-color: #888888; 
+}
+
+.controls { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+.controls label { font-size: 12px; font-weight: bold; color: #aaaaaa; }
+input[type="number"], input[type="text"] { width: 120px; }
+
+.action-btn {
+    background: #252525;
+    border: 1px solid #555555;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 2px;
+}
+
+.action-btn:hover { 
+    background: #e0e0e0; 
+    color: #121212; 
+    border-color: #e0e0e0;
+}
+
+.output-box {
+    background: #121212;
+    border: 1px solid #333333;
+    border-left: 3px solid #888888;
+    padding: 15px;
+    font-size: 13px;
+    min-height: 50px;
+    word-break: break-all;
+    color: #ffffff;
+    border-radius: 2px;
+}
+
+.pipeline-actions { margin-top: 10px; display: flex; gap: 15px; }
+.pipeline-actions button {
+    background: none; border: none; font-size: 11px; font-weight: bold;
+    color: #777777; cursor: pointer; padding: 0;
+}
+.pipeline-actions button:hover { color: #ffffff; text-decoration: underline; }
+
+/* ASCII бари */
+.ascii-bar { color: #888888; letter-spacing: -1px; }
+
+/* Візуалізація матриці Перестановки */
+.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.matrix-table th {
+    border: 1px solid #444444;
+    background: #252525;
+    padding: 8px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.matrix-table td {
+    border: 1px solid #333333;
+    padding: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.matrix-table .key-order {
+    font-size: 10px;
+    color: #888888;
+    display: block;
+    margin-top: 2px;
+    white-space: nowrap;
+}

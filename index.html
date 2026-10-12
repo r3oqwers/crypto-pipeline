@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.CRYPTO_PIPELINE // v1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="app-container">
+        <header class="app-header"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 8px;">
+    <div class="sys-info" style="margin-bottom: 0;">USER: MARICHKA // SEC_LEVEL: CLEARANCE_01 // STATUS: ONLINE</div>
+    <button class="action-btn" onclick="switchTab('moduleAuth')" style="padding: 4px 10px; font-size: 10px; color: #888; border-color: #444; background: transparent;">[ INITIATE_LOGIN ]</button>
+</div>
+            <h1>> CRYPTO_PIPELINE_</h1>
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('module1')">[ MOD_01: ENCRYPT ]</button>
+                <button class="tab-btn" onclick="switchTab('module3')">[ MOD_02: METRICS ]</button>
+                <button class="tab-btn" onclick="switchTab('module4')">[ MOD_03: ANALYSIS ]</button>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- Модуль 1: Шифрування -->
+            <section id="module1" class="tab-content active">
+                <div class="panel">
+                    <h2>:: CAESAR_CIPHER</h2>
+                    <textarea id="caesarInput" placeholder="INPUT_DATA..."></textarea>
+                    <div class="controls">
+                        <label>SHIFT_KEY (K): <input type="number" id="caesarKey" value="3"></label>
+                        <button class="action-btn" onclick="runCaesar('enc')">EXECUTE // ENCRYPT</button>
+                        <button class="action-btn" onclick="runCaesar('dec')">EXECUTE // DECRYPT</button>
+                    </div>
+                    <div class="output-box" id="caesarOutput">AWAITING_INPUT...</div>
+                    <div class="pipeline-actions">
+                        <button onclick="pipeTo('caesarOutput', 'permInput')">>> PIPE_TO(PERMUTATION)</button>
+                        <button onclick="pipeTo('caesarOutput', 'freqInput')">>> PIPE_TO(ANALYSIS)</button>
+                        <button onclick="downloadReport('caesarOutput', 'caesar_cipher_VAR10.txt')">>> EXPORT_TXT</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>:: PERMUTATION_CIPHER</h2>
+                    <textarea id="permInput" placeholder="INPUT_DATA..."></textarea>
+                    <div class="controls">
+                        <label>KEYWORD: <input type="text" id="permKey" value="Шифр"></label>
+                        <button class="action-btn" onclick="runPerm('enc')">EXECUTE // ENCRYPT</button>
+                        <button class="action-btn" onclick="runPerm('dec')">EXECUTE // DECRYPT</button>
+                    </div>
+                    <div class="output-box" id="permOutput">AWAITING_INPUT...</div>
+                    <div class="pipeline-actions">
+                        <button onclick="pipeTo('permOutput', 'metricsInput')">>> PIPE_TO(METRICS)</button>
+                        <button onclick="downloadReport('permOutput', 'perm_cipher_VAR14.txt')">>> EXPORT_TXT</button>
+                        <button onclick="visualizePermutation()">>> VISUALIZE_MATRIX</button>
+                    </div>
+                    <div id="matrixVisualizer" style="margin-top: 15px; display: none; overflow-x: auto; padding-bottom: 10px;"></div>
+                </div>
+            </section>
+
+                <!-- Модуль Авторизації (Лаба 2) -->
+            <section id="moduleAuth" class="tab-content">
+                <div class="panel">
+                    <h2>:: JWT_AUTHENTICATION</h2>
+                     <p class="desc"># Зв'язок із сервером: Хешування SHA256, перевірка даних та видача Bearer токена</p>
+
+                <div class="controls" style="flex-direction: column; align-items: flex-start;">
+                        <label>LOGIN (Прізвище): <input type="text" id="authLogin" placeholder="Паздерська"></label>
+                        <label>PASSWORD (Ім'я): <input type="password" id="authPass" placeholder="Марія"></label>
+                        <button class="action-btn" onclick="attemptLogin()" style="margin-top: 10px;">EXECUTE // LOGIN</button>
+                    </div>
+
+                    <h2 style="font-size: 12px; color: #777; border: none; margin-top: 20px;">>> SERVER_RESPONSE:</h2>
+                <div class="output-box" id="authOutput">AWAITING_CREDENTIALS...</div>
+
+        <button class="action-btn" onclick="testProtectedRoute()" style="margin-top: 15px;">EXECUTE // TEST_PROTECTED_ROUTE</button>
+    </div>
+</section>
+
+            <!-- Модуль 3: Метрики -->
+            <section id="module3" class="tab-content">
+                <div class="panel">
+                    <h2>:: INTEGRITY_METRICS</h2>
+                    <p class="desc"># Збір статичних даних перед дешифруванням</p>
+                    <textarea id="metricsInput" placeholder="INPUT_DATA..."></textarea>
+                    <button class="action-btn" onclick="runMetrics()">RUN_DIAGNOSTICS</button>
+                    <div class="output-box" id="metricsOutput">
+                        <ul id="metricsList" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Модуль 4: Криптоаналіз та Брутфорс -->
+            <section id="module4" class="tab-content">
+                <div class="panel">
+                    <h2>:: FREQUENCY_ANALYSIS & BRUTEFORCE</h2>
+                    <p class="desc"># Злом моноалфавітної заміни (Аналіз частот та Метод грубої сили)</p>
+                    <textarea id="freqInput" placeholder="INPUT_ENCRYPTED_DATA..."></textarea>
+                    
+                    <div class="controls">
+                        <button class="action-btn" onclick="runFrequencyAnalysis()">INITIATE_FREQ_SCAN</button>
+                        <button class="action-btn" onclick="runBruteForce()" style="border-color: #333; font-weight: bold;">[ INITIATE_BRUTEFORCE ]</button>
+                    </div>
+                    
+                    <div class="output-box" id="freqOutput" style="margin-bottom: 20px;">
+                        AWAITING_SCAN_INITIALIZATION...
+                    </div>
+                    
+                    <h2 style="font-size: 12px; color: #777; border: none;">>> BRUTEFORCE_LOG:</h2>
+                    <div class="output-box" id="bruteOutput" style="max-height: 250px; overflow-y: auto;">
+                        AWAITING_ATTACK_COMMAND...
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
